@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-network-policy
+  namespace: default
+spec:
+  policyTypes:
+  - Ingress
+  ingress:
+  - from: 
+    - ipBlock:
+        cidr: 10.224.0.52/32
+    ports: 
+    - port: 80
+  podSelector:
+    matchLabels:
+      app: nginx

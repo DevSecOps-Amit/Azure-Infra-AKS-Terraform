@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-3
+  namespace: default
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:   #requiredDuringSchedulingIgnoredDuringExecution
+      - weight: 100
+        preference:
+            matchExpressions:
+              - key: agentpool
+                operator: In
+                values:
+                  - pool1
+  containers:
+  - image: nginx:latest
+    name: nginx-container
+    ports:
+    - containerPort: 80

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod
+ namespace: default
+ labels:
+    app: nginx
+    name: nginx-pod
+spec:
+  volumes: 
+  - name: new-volume
+    persistentVolumeClaim:
+      claimName: amit-pvc
+  containers:
+  - image: nginx
+    name: nginx-container
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: new-volume
+      mountPath: /usr/share/nginx/html

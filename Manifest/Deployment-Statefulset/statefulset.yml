@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: abcd
+  namespace: my-namespace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: busybox
+  serviceName: abcd-service
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      containers:
+      - name: abcd-container
+        image: busybox:unstable-uclibc
